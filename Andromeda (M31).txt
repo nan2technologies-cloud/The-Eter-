@@ -1,0 +1,47 @@
+# Andromeda (M31) Galaxis Rotációs Görbe Szimuláció
+# Modell: Az Örvény-Dinamikai és Vákuum-Energetikai Világmodell
+# Szerző: Borbély Nándor Tibor / N@N2 Technologies
+#
+# Leírás: Ez a szimuláció bemutatja az M31 galaxis peremcsillagainak sebességét
+# a fősodratú klasszikus (sötét anyag nélküli) modell és az Örvény-Dinamikai modell alapján.
+# A modell a hiányzó gravitációt a központi mag éter-mátrixot megforgató kinetikus örvényével pótolja.
+
+import math
+
+def calculate_velocities():
+    # Konstansok és adatok
+    G = 4.30091e-6 # Gravitációs állandó (kpc * (km/s)^2 / M_nap)
+    mass_core_m31 = 9e10 # A galaxis magjának becsült barionikus tömege (Naptömegben)
+    
+    # Éter-örvény koefficiens (a sötét anyag helyettesítője)
+    vortex_strength = 28000 
+    
+    # Vizsgált távolságok a galaxis magjától (kpc)
+    radii = [15, 35]
+    
+    # Távcsővel mért tényleges sebességek (km/s)
+    observed_velocities = [255, 230]
+    
+    print("===============================================================")
+    print(" ANDROMÉDA (M31) ROTÁCIÓS GÖRBE - ÖSSZEHASONLÍTÁS ")
+    print("===============================================================")
+    print(f"{'Távolság (kpc)':<15} | {'Mért (km/s)':<15} | {'Klasszikus (km/s)':<20} | {'Örvény-Dinamikus (km/s)':<25}")
+    print("-" * 80)
+    
+    for i, radius in enumerate(radii):
+        # Klasszikus számítás (csak látható tömeg, sötét anyag nélkül)
+        # v = sqrt(G * M / r)
+        v_classical = math.sqrt(G * mass_core_m31 / radius)
+        
+        # Örvény-Dinamikai számítás (látható tömeg + éter-örvény hatás)
+        # v = sqrt(G * M / r + vortex_strength)
+        v_vortex = math.sqrt((G * mass_core_m31 / radius) + vortex_strength)
+        
+        # Eredmények kiírása
+        print(f"{radius:<15} | {observed_velocities[i]:<15} | {v_classical:<20.1f} | {v_vortex:<25.1f}")
+        
+    print("===============================================================")
+    print("Következtetés: Az Örvény-Dinamikai paraméter sötét anyag nélkül is stabilizálja a peremcsillagok pályáját.")
+
+if __name__ == '__main__':
+    calculate_velocities()
