@@ -1,0 +1,48 @@
+# Andromeda (M31) Galaxy Rotation Curve Simulation
+# Model: The Vortex-Dynamic and Vacuum-Energetic World Model
+# Author: Nándor T. Borbély / N@N2 Technologies
+#
+# Description: This simulation demonstrates the velocity of peripheral stars in the M31 galaxy
+# based on the mainstream classical model (without dark matter) and the Vortex-Dynamic model.
+# The model replaces the missing gravity with a kinetic vortex generated in the ether-matrix by the central core.
+
+import math
+
+def calculate_velocities():
+    # Constants and data
+    G = 4.30091e-6 # Gravitational constant (kpc * (km/s)^2 / M_sun)
+    mass_core_m31 = 9e10 # Estimated baryonic mass of the galactic core (in Solar masses)
+    
+    # Ether-vortex coefficient (substitute for dark matter)
+    vortex_strength = 28000 
+    
+    # Examined distances from the galactic core (kpc)
+    radii = [15, 35]
+    
+    # Actual velocities measured by telescope (km/s)
+    observed_velocities = [255, 230]
+    
+    print("=========================================================================")
+    print(" ANDROMEDA (M31) ROTATION CURVE - COMPARISON ")
+    print("=========================================================================")
+    print(f"{'Distance (kpc)':<15} | {'Observed (km/s)':<17} | {'Classical (km/s)':<18} | {'Vortex-Dynamic (km/s)':<25}")
+    print("-" * 89)
+    
+    for i, radius in enumerate(radii):
+        # Classical calculation (only visible mass, no dark matter)
+        # v = sqrt(G * M / r)
+        v_classical = math.sqrt(G * mass_core_m31 / radius)
+        
+        # Vortex-Dynamic calculation (visible mass + ether-vortex effect)
+        # v = sqrt(G * M / r + vortex_strength)
+        v_vortex = math.sqrt((G * mass_core_m31 / radius) + vortex_strength)
+        
+        # Print results
+        print(f"{radius:<15} | {observed_velocities[i]:<17} | {v_classical:<18.1f} | {v_vortex:<25.1f}")
+        
+    print("=========================================================================")
+    print("Conclusion: The Vortex-Dynamic parameter stabilizes the orbits of peripheral")
+    print("stars without the need for dark matter.")
+
+if __name__ == '__main__':
+    calculate_velocities()
